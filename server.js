@@ -16,7 +16,7 @@ var debug = require('debug')('sburger');
 // Our model controllers (rather than routes)
 var application_controller = require('./controllers/application_controller');
 
-var cats_controller = require('./controllers/burgers_controller');
+var burgers_controller = require('./controllers/burgers_controller');
 
 var users_controller = require('./controllers/users_controller');
 
@@ -57,7 +57,7 @@ app.use('/burgers', burgers_controller);
 app.use('/users', users_controller);
 
 // we bring in the models we exported with index.js
-var models = require("../models");
+ var models = require("./models");
 
 // we set the port of the app
 app.set('port', process.env.PORT || 3000);
@@ -67,8 +67,8 @@ app.set('port', process.env.PORT || 3000);
 models.sequelize.sync().then(function () {
 	// set our app to listen to the port we set above
     app.listen(app.get('port'), function() {
-  	// then save a log of the listening to our debugger.
-    debug('Express server listening on port ' + app.address().port);
+    // then save a log of the listening to our debugger.
+    debug('Express server listening on port ' + this.address().port);
   });
 });
 

@@ -21,7 +21,45 @@ router.get('/', function(req, res) {
       user_id: req.session.user_id,
       email: req.session.user_email,
       logged_in: req.session.logged_in,
+      username: req.session.username,
       burgers: burgers
     })
   })
 });
+
+router.post('/create', function (req, res) {
+  
+  // SOLUTION:
+  // =========
+  // use the Cat model to create a cat based on what's
+  // passed in req.body (name, sleepy, user_id)
+  models.Burger.create({
+    burgerName: req.body.name,
+    user_id: req.session.user_id
+  })
+  // connect the .create to this .then
+  .then(function() {
+    res.redirect('/');
+  })
+});
+
+router.put('/update/:id', function(req,res) {
+  // SOLUTION:
+  // =========
+  // use the Cat model to update a cat's sleepy status
+  // based on the boolean passed in req.body sleepy
+  // and the id of the cat (as passed in the url)
+  models.Burger.update(
+  {
+    devoured: req.body.devoured
+  },
+  {
+    where: { id : req.params.id }
+  })
+  // connect it to this .then.
+  .then(function (result) {
+    res.redirect('/');
+  })
+});
+
+module.exports = router;

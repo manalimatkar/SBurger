@@ -7,7 +7,8 @@
       <ul>
         {{#each burgers}}
           {{#unless this.devoured}}
-            <li> <h3>{{this.id}}.{{this.burger_name}}</h3>
+            <li> <h3>{{this.id}}.{{this.burgerName}}</h3>
+                <h4>Created By {{this.User.userName}}</h4>
               <form class="form-inline" action="burgers/update/{{this.id}}?_method=PUT" method="POST">
                 <input type="hidden" name="devoured" value="true">
                 <button type="submit" class="btn btn-default">Devourer!</button>
@@ -22,21 +23,34 @@
       <ul>
         {{#each burgers}}
           {{#if this.devoured}}
-            <li>{{this.id}}.{{this.burger_name}}.....Yummmmmm</li>      
+            <li>
+              <h3>{{this.id}}.{{this.burgerName}}.....Yummmmmm</h3>
+            </li>      
           {{/if}}
         {{/each}}
       </ul>
     </div>
   </div>
+ 
   <div class="row">
+  {{#unless logged_in}}
+  <div class="col-md-12">
+   <p> Don't Like whats on Menu....To add your choice of Burger <a href="/users/sign-in">Sign In</a> 
+   </br> If not a regular <a href="/users/new">Sign Up !!</a>
+   </p>
+  </div>
+  {{/unless}}
+   {{#if logged_in}}
     <div class="col-md-12">
-      <h2>Add a Burger</h2>
+      <h4>Hello! {{username}}, Feel free to DEVOURE From our menu OR Create your Burger</h4>
+      <h5><a href="/users/sign-out">Else Sign Out</a></h5>
       <form class="create-update-form form-inline" action="burgers/create" method="POST">
         <div class="form-group">
           <label for="burger">Burger Name:</label>
-          <input type="text" id="burger" name="name">    
+          <input type="text" id="burger" name="name">   
         </div>
         <button type="submit" class="btn btn-default">Add Burger</button>
       </form>
-    </div>
+  </div>
+  {{/if}}
 </div>
