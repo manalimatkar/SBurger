@@ -60,17 +60,15 @@ app.use('/users', users_controller);
  var models = require("./models");
 
 // we set the port of the app
-
-var PORT = process.env.PORT || 3000
-// app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3000);
 
 // we sync the models with our db 
 // (thus creating the apropos tables)
 models.sequelize.sync().then(function () {
 	// set our app to listen to the port we set above
-    app.listen(PORT, function() {
+    app.listen(app.get('port'), function() {
     // then save a log of the listening to our debugger.
-    debug('Express server listening on port ' + PORT);
+    console.log('Express server listening on port ' + this.address().port);
   });
 });
 
