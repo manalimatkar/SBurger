@@ -68,7 +68,7 @@ models.sequelize.sync().then(function () {
 	// set our app to listen to the port we set above
     app.listen(app.get('port'), function() {
     // then save a log of the listening to our debugger.
-    console.log('Express server listening on port ' + this.address().port);
+    debug('Express server listening on port ' + this.address().port);
   });
 });
 
