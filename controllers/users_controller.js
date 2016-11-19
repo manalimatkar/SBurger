@@ -91,7 +91,7 @@ router.post('/create', function(req,res) {
           .then(function(user){
 
 
-            // so what's happening here?
+            
             // we enter the user's session by setting properties to req.
 
             // we save the logged in status to the session
